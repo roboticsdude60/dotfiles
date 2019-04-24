@@ -1,0 +1,35 @@
+- clean: ['~']
+- link:
+    ~/.i3/config:
+        create: true
+        force: true
+        path: i3/config
+    ~/.config/i3status/config:
+        create: true
+        force: true
+        path: i3status/config
+    ~/.config/Qtwebflix/Providers.conf:
+        create: false
+        force: true
+        path: qtwebflix/Providers.conf
+    ~/.config/qutebrowser/:
+        glob: true
+        force: true
+        path: qutebrowser/*
+    ~/.gitconfig:
+        force: true
+        relink: true
+    ~/.dmenurc:
+        force: true
+        relink: true
+    
+    ~/.config/i3-scrot.conf:
+        force: true
+        relink: true
+    ~/.config/kdeconnect/trusted_devices:
+        create: false
+        force: true
+    ~/.zshrc:
+        force: true
+        relink: true
+        
