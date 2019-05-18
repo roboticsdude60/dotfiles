@@ -56,20 +56,27 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F3 exec dolphin 
+bindsym $mod+F3 exec pcmanfm 
 bindsym $mod+F2 exec terminal -e ranger
 bindsym Ctrl+Mod1+t exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox 
 # a music player
 # bindsym $mod+F5 exec terminal -e 'mocp'
 
 # compton is a compositer. allows transparency etc of windows.
-bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id compton -b
-# dunst is for notifications
+# but why would I ever be starting and killing it???
+# bindsym $mod+t exec --no-startup-id pkill compton
+# bindsym $mod+Ctrl+t exec --no-startup-id compton -b
+# dunst is for notifications. same question...
 #bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+
+# most often I only want a window, so single keypress
+bindsym Print exec --no-startup-id i3-scrot -w
+bindsym Ctrl+Print --release exec --no-startup-id i3-scrot
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -s
+
+bindsym $mod+Home exec ~/.dotfiles/custom_scripts/change_bg
+
+
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
