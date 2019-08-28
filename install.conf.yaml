@@ -27,7 +27,7 @@
         force: true
         relink: true
     ~/.config/kdeconnect/trusted_devices:
-        create: false
+        create: true
         force: true
     ~/.zshrc:
         force: true
