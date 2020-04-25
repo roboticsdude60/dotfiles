@@ -1,26 +1,27 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
-set $borderw 2
-default_border pixel $borderw
+#set $borderw 2
+default_border pixel 0
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 floating_maximum_size 1200 x 600
 
-# Hide borders, does nothing in i3-gapps
-hide_edge_borders smart
+# Hide borders, does nothing in i3-gapps which i'm using on my laptop
+#hide_edge_borders smart
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font xft:Fira Mono 11
+font xft:Fira-Mono 11
 
 # change borders
-bindsym $mod+b border toggle $borderw
+bindsym $mod+b border toggle
 
-bindsym $mod+Shift+q kill
+bindsym $mod+Escape kill
 
 # reload the configuration file, restart
+# what if I only have the restart? Why have a reload?
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
@@ -33,7 +34,7 @@ bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+F3 exec pcmanfm 
-bindsym Ctrl+Mod1+t exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox 
+# bindsym Ctrl+Mod1+t exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox 
 
 # screenshots
 # most often I only want a window, so single keypress
@@ -75,13 +76,11 @@ bindsym $mod+Shift+p floating disable
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+o layout toggle split
+#use $mod+c instead, its bound to layout toggle all
+#bindsym $mod+o layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
 
 # toggle sticky. sticky is like pinning
 bindsym $mod+x sticky toggle
@@ -104,25 +103,34 @@ bindsym $mod+minus resize shrink height 10 px or 10 ppt, resize shrink width 10 
 # Autostart applications
 exec --no-startup-id dunst
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Only doing these in i3 because disabled it in systemd for faster boot
 exec --no-startup-id sudo systemctl start NetworkManager
 exec --no-startup-id sudo systemctl start ModemManager
+exec --no-startup-id systemctl start org.cups.cupsd
+
 exec --no-startup-id feh --recursive --randomize --bg-fill ~/Pictures
+# a compositor for transparency etc
 exec --no-startup-id compton -b
 exec --no-startup-id xautolock -time 10 -locker blurlock
-exec --no-startup-id urxvtd # a urxvt daemon
+
+# a urxvt daemon. 
+exec --no-startup-id urxvtd
+exec --no-startup-id emacs --daemon
+
+# a dropdown terminal
+exec --no-startup-id tilda
 exec --no-startup-id pulseaudio --start
 
+# system tray tools
 exec --no-startup-id volumeicon
 #exec --no-startup-id pa-applet
 exec --no-startup-id nm-applet
 exec --no-startup-id pamac-tray
 exec --no-startup-id redshift-gtk
 exec --no-startup-id clipit
-#exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
 
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb # this is a key combo grabber
-
+# ?? what exactly are these doing?
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -158,7 +166,7 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+w workspace $wsw
 bindsym $mod+e workspace $wse
-bindsym $mod+r workspace $wsgimp
+#bindsym $mod+r workspace $wsgimp
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
@@ -188,13 +196,18 @@ bindsym $mod+Shift+e move container to workspace $wse; workspace $wse
 assign [class="Chromium"] $wsw
 assign [class="Emacs"] $wse
 assign [class="Gimp"] $wsgimp
+#assign [class="polar-bookshelf"] $work
 #################################################
-
+for_window [class="polar-bookshelf" ]layout tabbed
+#not sure how to make work
+#for_window [title="*.pdf" ] move container to workspace $ws6
 
 # Open specific applications in floating mode
 #mpv picture in picture
-for_window [class="mpv"] floating enable sticky enable border none
+# mpv floating and auto toggleable to hiding in scratchpad
+for_window [class="mpv"] floating enable sticky enable border none move scratchpad scratchpad show
 for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Uget-gtk"] floating enable border pixel 1
 for_window [title="File Transfer*"] floating enable
 for_window [class="GParted"] floating enable border normal
 for_window [class="Lxappearance"] floating enable sticky enable border normal
@@ -231,6 +244,16 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
+bindsym $mod+F9 mode "$mode_media"
+set $mode_media F8 V- F9 V+
+mode "$mode_media" {
+    bindsym $mod+F9 mode "default"
+
+
+    bindsym F9 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+    bindsym F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+}
+
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
@@ -265,21 +288,21 @@ bar {
 gaps inner 20
 gaps outer 0
 
-smart_gaps on
+#smart_gaps on
 smart_borders on
 
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift+ +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps_inner"
 mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set 0
 	
 	bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Escape mode "default"
 }
 
