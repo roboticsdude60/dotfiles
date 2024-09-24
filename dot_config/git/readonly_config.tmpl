@@ -1,0 +1,22 @@
+[branch]
+	autoSetupMerge = "simple"
+	autoSetupRebase = "always"
+
+[core]
+	hooksPath = "~/.git_hooks"
+
+[delta]
+	side-by-side = true
+
+[merge]
+	conflictStyle = "zdiff3"
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[user]
+	email = {{ .email |  quote }}
+	name = "Joseph Scholl"

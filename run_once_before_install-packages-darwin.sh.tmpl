@@ -1,0 +1,68 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Install XCode Command Line Tools if necessary
+xcode-select --install || echo "XCode already installed"
+
+# Install Homebrew if necessary
+if which -s brew; then
+    echo 'Homebrew is already installed'
+else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (
+        echo
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+    ) >>$HOME/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+
+# check if the user is the owner of the Homebrew installation
+if [ "$(stat -f '%Su' $(brew --prefix))" = "$(whoami)" ]; then
+# I can get explicitly installed brew packages with `brew leaves --installed-on-request`
+brew bundle --no-lock --file=/dev/stdin <<EOF
+
+tap "lizardbyte/homebrew"
+brew "lizardbyte/homebrew/sunshine"
+
+brew "atuin"
+brew "aria2"
+brew "awscli@2"
+brew "bat"
+brew "cairo"
+brew "chezmoi"
+brew "coreutils"
+brew "dust"
+brew "entr"
+brew "fish"
+brew "ffmpeg"
+brew "fzf"
+brew "git-delta"
+brew "glib"
+brew "gnu-sed"
+brew "harfbuzz"
+brew "lazygit"
+brew "libpng"
+brew "llm"
+brew "mpv"
+brew "node"
+brew "openjdk"
+brew "ripgrep"
+brew "yt-dlp"
+brew "zoxide"
+
+cask "bitwarden"
+cask "db-browser-for-sqlite"
+cask "font-monaspace"
+cask "orbstack"
+cask "postman"
+cask "raycast"
+cask "syncthing"
+cask "tableplus"
+cask "visual-studio-code"
+
+EOF
+else
+    echo "You are not the user who installed Homebrew, so we can't install the packages listed above."
+fi
+{{ end -}}
