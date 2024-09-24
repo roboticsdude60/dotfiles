@@ -1,0 +1,52 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "features": {
+    "inline_completion_provider": "supermaven"
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-20240620"
+    },
+    "version": "2"
+  },
+  "vim_mode": false,
+  "project_panel": {
+    "dock": "right"
+  },
+  "base_keymap": "VSCode",
+  "buffer_font_family": "Monaspace Neon Var",
+  "buffer_font_size": 14,
+  "buffer_line_height": {
+    "custom": 1.55
+  },
+  "buffer_font_features": {
+    "ss02": true,
+    "ss04": true,
+    "ss05": true,
+    "ss06": true,
+    "ss07": true,
+    "calt": true
+  },
+  "soft_wrap": "editor_width",
+  "theme": "VSCode Dark Modern",
+  "ui_font_family": "Monaspace Xenon Var",
+  "ui_font_size": 15,
+  "terminal": {
+    "font_size": 13,
+    "copy_on_select": true,
+    "shell": {
+      "program": "fish"
+    }
+  },
+  "autosave": "on_focus_change",
+  "extend_comment_on_newline": false
+  // "use_autoclose": false
+}
