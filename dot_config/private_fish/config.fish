@@ -12,19 +12,23 @@ if status is-interactive
     # git abbreviations
     abbr -a lg 'lazygit'
     abbr -a g 'git'
+    abbr -a ga 'git add'
     abbr -a gb 'git branch'
     abbr -a gf 'git fetch'
     abbr -a gg 'git pull'
-    abbr -a gs 'git status'
+    abbr -a gl 'git log'
+    abbr -a gst 'git status'
     # stash
-    abbr -a gst 'git stash'
-    abbr -a gstp 'git stash pop'
+    abbr -a gs 'git stash'
+    abbr -a gsp 'git stash pop'
+    abbr -a gspu 'git stash push'
     # checkout
     abbr -a gco 'git checkout'
     abbr -a gcom 'git checkout master'
     abbr -a gnb 'git fetch && git checkout origin/master -b josephscholl.@'
     # commit
     abbr -a gc 'git commit'
+    abbr -a gca 'git commit --amend'
     abbr -a --set-cursor=@ gcm 'git commit -m "@"'
     # rebase
     abbr -a gr 'git rebase'
