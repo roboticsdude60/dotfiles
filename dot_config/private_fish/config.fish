@@ -25,7 +25,7 @@ if status is-interactive
     # checkout
     abbr -a gco 'git checkout'
     abbr -a gcom 'git checkout master'
-    abbr -a --set-cursor=@ gnb 'git fetch && git checkout origin/master -b josephscholl.@'
+    abbr -a --set-cursor=@ gnb 'git fetch && git checkout origin/master -b josephscholl-@'
     # commit
     abbr -a gc 'git commit'
     abbr -a gca 'git commit --amend'
