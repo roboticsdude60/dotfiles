@@ -2,3 +2,7 @@
 
 [data]
     email = {{ $email | quote }}
+
+[cd]
+    command = "sh"
+    args = ["-c", "exec $(command -v fish || echo sh)"]
