@@ -37,9 +37,9 @@ if status is-interactive
     abbr -a gwl 'git worktree list'
     abbr -a gwr 'git worktree remove'
     abbr -a cdw 'cd_worktree'
-    complete -c cd_worktree -f -a '(__fish_git_worktree_paths)' -d 'cd to worktree'
     abbr -a cdmw 'cd (git rev-parse --show-toplevel)'
     abbr -a --set-cursor=@ gnw 'git worktree add ../josephscholl-@'
+    abbr -a --set-cursor=@ zow 'zed_open_worktree'
     # commit
     abbr -a gc 'git commit'
     abbr -a gca 'git commit --amend'
