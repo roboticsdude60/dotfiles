@@ -33,6 +33,7 @@ if status is-interactive
     abbr -a gco 'git checkout'
     abbr -a gcom 'git checkout master'
     abbr -a --set-cursor=@ gnb 'git fetch && git checkout origin/master -b josephscholl-@'
+    abbr -a --set-cursor=@ gnw 'git worktree add ../josephscholl-@'
     # commit
     abbr -a gc 'git commit'
     abbr -a gca 'git commit --amend'
@@ -46,3 +47,4 @@ if status is-interactive
     abbr -a gp 'git push'
     abbr -a gpf 'git push --force-with-lease'
 end
+
