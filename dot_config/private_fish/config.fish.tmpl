@@ -33,6 +33,11 @@ if status is-interactive
     abbr -a gco 'git checkout'
     abbr -a gcom 'git checkout master'
     abbr -a --set-cursor=@ gnb 'git fetch && git checkout origin/master -b josephscholl-@'
+    # worktree
+    abbr -a gwl 'git worktree list'
+    abbr -a --set-cursor=@ gwr 'git worktree remove ../josephscholl-@'
+    abbr -a --set-cursor=@ cdw 'cd ../josephscholl-@'
+    abbr -a cdm 'cd (git rev-parse --show-toplevel)'
     abbr -a --set-cursor=@ gnw 'git worktree add ../josephscholl-@'
     # commit
     abbr -a gc 'git commit'
