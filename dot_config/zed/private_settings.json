@@ -7,26 +7,22 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "features": {
-    "inline_completion_provider": "supermaven"
-  },
-  "assistant": {
+  "agent": {
+    "always_allow_tool_actions": false,
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
+    },
+    "play_sound_when_agent_done": true,
+    "default_profile": "write",
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
-    },
-    "version": "2"
+      "model": "claude-sonnet-4"
+    }
   },
-  "vim_mode": false,
-  "project_panel": {
-    "dock": "right"
-  },
+  "autosave": "on_focus_change",
   "base_keymap": "VSCode",
   "buffer_font_family": "Monaspace Neon Var",
-  "buffer_font_size": 14,
-  "buffer_line_height": {
-    "custom": 1.55
-  },
   "buffer_font_features": {
     "ss02": true,
     "ss04": true,
@@ -35,10 +31,41 @@
     "ss07": true,
     "calt": true
   },
+  "buffer_font_size": 14,
+  "buffer_line_height": {
+    "custom": 1.55
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "extend_comment_on_newline": false,
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "icon_theme": "Seti Icon Theme",
+  "languages": {
+    "TypeScript": {
+      "show_edit_predictions": true
+    },
+    "TSX": {
+      "show_edit_predictions": true
+    }
+  },
+  "minimap": { "show": "always" },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "dock": "right"
+  },
+  "show_edit_predictions": true,
   "soft_wrap": "editor_width",
-  "theme": "Zed Legacy: Atelier Seaside Light",
-  "ui_font_family": "Monaspace Xenon Var",
-  "ui_font_size": 15,
   "terminal": {
     "font_size": 13,
     "copy_on_select": true,
@@ -46,7 +73,7 @@
       "program": "fish"
     }
   },
-  "autosave": "on_focus_change",
-  "extend_comment_on_newline": false
-  // "use_autoclose": false
+  "theme": "Zed Legacy: Atelier Seaside Light",
+  "ui_font_family": "Monaspace Xenon Var",
+  "ui_font_size": 15
 }
