@@ -74,10 +74,11 @@ function git_clone_for_worktrees --description "Clone with worktrees setup for c
     end
 
     echo "Creating worktree for branch $primary_branch"
-    git worktree add -b $primary_branch $primary_branch origin/$primary_branch
+    git worktree add $primary_branch
     or return 1
 
     echo "Successfully set up a hidden .bare repository with worktrees available at: "(pwd)
+    cd $primary_branch
 end
 
 # See also
