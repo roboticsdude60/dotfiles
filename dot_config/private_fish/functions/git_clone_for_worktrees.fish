@@ -1,13 +1,16 @@
 #!/usr/bin/env fish
 
 function git_clone_for_worktrees --description "Clone with worktrees setup for convenience"
-    argparse 'h/help' -- $argv
+    argparse 'h/help' 'd/depth=' -- $argv
     or return
 
     if set -q _flag_help
-        echo "Usage: git_clone_for_worktrees <repository_url>"
+        echo "Usage: git_clone_for_worktrees [--depth N] <repository_url>"
         echo ""
         echo "Clone a git repository as a bare repository and set up for worktrees."
+        echo ""
+        echo "Options:"
+        echo "  -d, --depth N     Create a shallow clone with a history truncated to N commits"
         echo ""
         echo "Arguments:"
         echo "  repository_url    Git repository URL (e.g., git@gitlab.com:user/repo.git)"
@@ -26,14 +29,18 @@ function git_clone_for_worktrees --description "Clone with worktrees setup for c
     end
 
     set repo_url $argv[1]
-    set clone_args $argv[2..-1]
+
+    # Build depth arguments
+    if set -q _flag_depth
+        set depth_args --depth $_flag_depth
+    end
 
     # Extract repository name from URL
     set folder_name (basename $repo_url)
 
     # Clone bare repository into a hidden .bare subdirectory
     echo "Cloning bare repository..."
-    git clone --bare $clone_args $repo_url $folder_name/.bare
+    git clone --bare $depth_args $repo_url $folder_name/.bare
     or return 1
 
     # Step 3: Create .git file pointing to bare repository
