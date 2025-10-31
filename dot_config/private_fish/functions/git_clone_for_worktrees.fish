@@ -43,7 +43,7 @@ function git_clone_for_worktrees --description "Clone with worktrees setup for c
     or return 1
 
     # Step 3: Create .git file pointing to bare repository
-    cd $folder_name
+    pushd $folder_name
     echo "Setting up .git file to point to the bare repository..."
     echo "gitdir: ./.bare" > .git
 
