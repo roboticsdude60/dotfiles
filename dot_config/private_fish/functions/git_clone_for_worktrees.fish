@@ -39,7 +39,6 @@ function git_clone_for_worktrees --description "Clone with worktrees setup for c
     set folder_name (basename $repo_url)
 
     # Clone bare repository into a hidden .bare subdirectory
-    echo "Cloning bare repository..."
     git clone --bare $depth_args $repo_url $folder_name/.bare
     or return 1
 
