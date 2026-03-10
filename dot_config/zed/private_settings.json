@@ -7,8 +7,31 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  },
+  "excerpt_context_lines": 5,
+  "vim_mode": false,
   "agent": {
-    "always_allow_tool_actions": false,
     "inline_assistant_model": {
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
@@ -22,7 +45,7 @@
   },
   "autosave": "on_focus_change",
   "base_keymap": "VSCode",
-  "buffer_font_family": "Monaspace Neon Var",
+  "buffer_font_family": "Monaspace Neon",
   "buffer_font_features": {
     "ss02": true,
     "ss04": true,
@@ -31,6 +54,7 @@
     "ss07": true,
     "calt": true
   },
+  "buffer_font_weight": 300,
   "buffer_font_size": 14,
   "buffer_line_height": {
     "custom": 1.55
@@ -39,13 +63,12 @@
     "dock": "right"
   },
   "edit_predictions": {
+    "provider": "zed",
     "mode": "subtle"
   },
   "extend_comment_on_newline": false,
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
   "git_panel": {
+    "tree_view": true,
     "dock": "right"
   },
   "icon_theme": "Seti Icon Theme",
@@ -76,6 +99,6 @@
     }
   },
   "theme": "Zed Legacy: Atelier Seaside Light",
-  "ui_font_family": "Monaspace Xenon Var",
-  "ui_font_size": 15
+  "ui_font_family": "Monaspace Xenon",
+  "ui_font_size": 13.0
 }
