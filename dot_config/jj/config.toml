@@ -1,0 +1,39 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Joseph Scholl"
+email = "joseph.scholl@techcyte.com"
+
+[git]
+private-commits = "dev" # not sure if the dev base branch workflow is one to keep
+
+[revset-aliases]
+
+'context(x, n)' = 'first_ancestors(descendants(x, n), n)'
+# I'm not sure why, but the following did not seem as performant.
+# 'context(x, n)' = 'descendants(first_ancestors(x, n), n)'
+# 'context(x, n)' = ' first_ancestors(x, n) | descendants(x, n) '
+
+'ends(x)' = '(roots(x) | heads(x))'
+'leaves(x)' = 'heads(descendants(heads(x)))'
+'branch(x)' = 'reachable(x, trunk()..)'
+'branch_roots(x)' = 'roots(first_ancestors(x) ~ ::trunk())'
+'twig_ends(x)' = 'leaves(x) | branch_roots(x)'
+'or_twig_ends(x)' = 'x | twig_ends(x)'
+
+# Should probably show `present(@)` even if there is an error with a different working copy
+'interesting_from_working_branches' = 'or_twig_ends(present(@)|present(working_copies()))'
+
+# `~ ::remote_bookmarks(release/202*)` to filter out unmerged changes from cherry picks on release branches
+'my_unmerged_remote_branch_changes' = '(mine() & trunk().. & immutable() ~ ::remote_bookmarks(release/202*)  )'
+'interesting_from_old_branches' = 'ends(my_unmerged_remote_branch_changes) | twig_ends(my_unmerged_remote_branch_changes)'
+
+'interesting_quick' = 'trunk() | context(present(@), 4) | context(interesting_from_working_branches | bookmarks() | ends(mutable()) | ends(conflicts() & mutable()) , 3)'
+'interesting' = 'interesting_quick | context(interesting_from_old_branches, 3)'
+
+[ui]
+default-command = ["log", "--revision", "interesting_quick"]
+
+[aliases]
+enc = ["edit", "roots(mutable() & conflicts() & (::@ | @::))"]
+mergiraf = ["resolve", "--tool", "mergiraf"]
