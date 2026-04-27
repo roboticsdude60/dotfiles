@@ -5,7 +5,7 @@ name = "Joseph Scholl"
 email = "joseph.scholl@techcyte.com"
 
 [git]
-private-commits = "dev" # not sure if the dev base branch workflow is one to keep
+# private-commits = "dev" # not sure if the dev base branch workflow is one to keep
 
 [revset-aliases]
 
