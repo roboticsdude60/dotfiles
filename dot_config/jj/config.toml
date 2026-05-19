@@ -35,5 +35,5 @@ email = "joseph.scholl@techcyte.com"
 default-command = ["log", "--revision", "interesting_quick"]
 
 [aliases]
-enc = ["edit", "roots(mutable() & conflicts() & (::@ | @::))"]
+enc = ["edit", "roots(mutable() & conflicts() & (::@ | @::))"] # jj enc -> jj edit_next_conflict
 mergiraf = ["resolve", "--tool", "mergiraf"]
