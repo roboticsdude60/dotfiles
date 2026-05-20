@@ -7,6 +7,9 @@ email = "joseph.scholl@techcyte.com"
 [git]
 # private-commits = "dev" # not sure if the dev base branch workflow is one to keep
 
+[templates]
+git_push_bookmark = '"josephscholl-" ++ change_id.short()'
+
 [revset-aliases]
 
 'context(x, n)' = 'first_ancestors(descendants(x, n), n)'
