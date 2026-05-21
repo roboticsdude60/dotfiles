@@ -10,8 +10,8 @@ if status is-interactive
     zoxide init fish | source
     atuin init fish | source
 
-    abbr -a tsc "bunx tsc --noEmit"
-    abbr -a pairs "shuf -e james isaac nathan joseph | xargs -n2 | tee /dev/tty | pbcopy"
+    abbr -a cc 'claude'
+    # abbr -a pairs "shuf -e james isaac nathan joseph | xargs -n2 | tee /dev/tty | pbcopy"
 
     # TODO only add git abbreviations if we are in a git repo
     # if git rev-parse --is-inside-work-tree
