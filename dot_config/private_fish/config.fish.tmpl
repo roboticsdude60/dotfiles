@@ -57,6 +57,38 @@ if status is-interactive
     # merge requests
     abbr -a gmr 'git_mr_from'
     abbr -a gnmr 'git_mr_from'
+
+    # jj vcs abbreviations
+    abbr -a jjl 'jj log'
+    abbr -a jjsh 'jj show'
+    abbr -a jjst 'jj status'
+    abbr -a jjdi 'jj diff'
+
+    abbr -a jjn 'jj new'
+    abbr -a jjnt 'jj new \'trunk()\''
+    abbr -a jjdm --set-cursor=@ 'jj describe -m \'@\''
+    abbr -a jjcm --set-cursor=@ 'jj commit -m \'@\''
+    abbr -a jje 'jj edit'
+    abbr -a jjsp 'jj split'
+    abbr -a jjsq 'jj squash'
+    abbr -a jjrt 'jj rebase --onto \'trunk()\''
+    # resolving conflicts
+    abbr -a jjenc 'jj enc'
+    abbr -a jjm 'jj mergiraf'
+	# bookmarks
+    abbr -a jjb 'jj bookmark'
+    abbr -a jjbc 'jj bookmark create'
+    abbr -a jjbl 'jj bookmark list'
+    abbr -a jjbs 'jj bookmark set'
+    abbr -a jjba 'jj bookmark advance'
+    abbr -a jjbat 'jj bookmark advance --to'
+	# git remotes
+    abbr -a jjgf 'jj git fetch'
+    abbr -a jjgp 'jj git push'
+    abbr -a jjgpc 'jj git push --change'
+	# workspace
+    abbr -a jjw 'jj workspace'
+    abbr -a jjwl 'jj workspace list'
 end
 
 mise activate fish | source
