@@ -2,7 +2,7 @@
 
 [user]
 name = "Joseph Scholl"
-email = "joseph.scholl@techcyte.com"
+email = {{ .email | quote }}
 
 [git]
 # private-commits = "dev" # not sure if the dev base branch workflow is one to keep
