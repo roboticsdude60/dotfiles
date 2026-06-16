@@ -1,0 +1,137 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+	"cli_default_open_behavior": "new_window",
+	"formatter": "language_server",
+	"hard_tabs": true,
+	"inline_code_actions": false,
+	"agent_servers": {
+		"claude-acp": {
+			"default_config_options": {
+				"mode": "auto",
+				"model": "default"
+			},
+			"type": "registry",
+		},
+	},
+	"lsp": {
+		"lsp": {
+			"eslint": {
+				"settings": {
+					// only highlight the first line for multi-line problems
+					"problems": {
+						"shortenToSingleLine": true
+					},
+				},
+			},
+		},
+		"oxlint": {
+			"initialization_options": {
+				"settings": {
+					"configPath": null,
+					"run": "onSave",
+					"disableNestedConfig": false,
+					"fixKind": "none",
+					"unusedDisableDirectives": "warn",
+					"typeAware": true,
+				},
+			},
+			"oxfmt": {
+				"initialization_options": {
+					"settings": {
+						"fmt.configPath": null,
+						"run": "onSave",
+					},
+				},
+			},
+		},
+	},
+	"code_actions_on_format": {
+		// automatically fix eslint problems on save
+		"source.fixAll.eslint": true,
+		// automatically fix oxlint problems on save
+		"source.fixAll.oxc": true,
+	},
+	"excerpt_context_lines": 5,
+	"vim_mode": false,
+	"agent": {
+		"dock": "left",
+		"inline_assistant_model": {
+			"provider": "openai",
+			"model": "gpt-5.3-codex",
+		},
+		"play_sound_when_agent_done": "always",
+		"default_profile": "write",
+		"default_model": {
+			"effort": "high",
+			"enable_thinking": true,
+			"provider": "zed.dev",
+			"model": "claude-sonnet-4-6",
+		},
+	},
+	"autosave": "on_focus_change",
+	"base_keymap": "VSCode",
+	"buffer_font_family": "Monaspace Neon",
+	"buffer_font_features": {
+		"ss02": true,
+		"ss04": true,
+		"ss05": true,
+		"ss06": true,
+		"ss07": true,
+		"calt": true,
+	},
+	"buffer_font_weight": 300,
+	"buffer_font_size": 14,
+	"buffer_line_height": {
+		"custom": 1.55,
+	},
+	"collaboration_panel": {
+		"dock": "right",
+	},
+	"edit_predictions": {
+		"provider": "zed",
+		"mode": "subtle",
+	},
+	"extend_comment_on_newline": false,
+	"git_panel": {
+		"tree_view": true,
+		"dock": "right",
+	},
+	"icon_theme": "Seti Icon Theme",
+	"languages": {
+		"TypeScript": {
+			// "language_servers": ["vtsls"],
+		},
+		"TSX": {
+			// "language_servers": ["tsgo"],
+		},
+	},
+	"minimap": {
+		"show": "always"
+	},
+	"outline_panel": {
+		"dock": "right",
+	},
+	"project_panel": {
+		"dock": "right",
+	},
+	"show_edit_predictions": true,
+	"soft_wrap": "editor_width",
+	"terminal": {
+		"dock": "bottom",
+		"font_size": 13,
+		"copy_on_select": true,
+		"shell": {
+			"program": "fish",
+		},
+	},
+	"theme": "Zed Legacy: Atelier Seaside Light",
+	"ui_font_family": "Monaspace Xenon",
+	"ui_font_size": 13.0,
+}
