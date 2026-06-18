@@ -1,94 +1,32 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    fish_add_path ~/.local/bin # yes, this is safely idempotent
+
+    # Cache shell init outputs; regenerate if the binary is newer than the cache file
+    # chezmoi will automatically remove these cached files when `chezmoi apply` is run
+    set -l cache $__fish_config_dir/cached_init
 
     {{- if eq .chezmoi.os "darwin"}}
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    if not test -f $cache/brew_shellenv.fish; or test /opt/homebrew/bin/brew -nt $cache/brew_shellenv.fish
+        /opt/homebrew/bin/brew shellenv fish > $cache/brew_shellenv.fish
+    end
+    source $cache/brew_shellenv.fish
     {{ end -}}
 
-    fish_add_path ~/.local/bin
+    if not test -f $cache/atuin.fish; or test atuin -nt $cache/atuin.fish
+        # atuin pty-proxy init fish > $cache/atuin.fish
+        # the pty-proxy does not seem to work with fish on macos, though tbh I'm not sure exactly how it would appear differently.
+        atuin init fish >> $cache/atuin.fish
+    end
+    source $cache/atuin.fish
+    if not test -f $cache/zoxide.fish; or test zoxide -nt $cache/zoxide.fish
+        zoxide init fish > $cache/zoxide.fish
+    end
+    source $cache/zoxide.fish
 
-    zoxide init fish | source
-
-    atuin pty-proxy init fish | source
-    atuin init fish | source
-
-    abbr -a cc 'claude'
-    # abbr -a pairs "shuf -e james isaac nathan joseph | xargs -n2 | tee /dev/tty | pbcopy"
-
-    # TODO only add git abbreviations if we are in a git repo
-    # if git rev-parse --is-inside-work-tree
-
-    # git abbreviations
-    abbr -a lg 'lazygit'
-    abbr -a g 'git'
-    abbr -a ga 'git add'
-    abbr -a gb 'git branch'
-    abbr -a gf 'git fetch'
-    abbr -a gg 'git pull'
-    abbr -a gl 'git log'
-    abbr -a gst 'git status'
-    # stash
-    abbr -a gs 'git stash'
-    abbr -a gsp 'git stash pop'
-    abbr -a gspu 'git stash push'
-    # checkout
-    abbr -a gco 'git checkout'
-    abbr -a gcom 'git checkout master'
-    abbr -a --set-cursor=@ gnb 'git fetch && git checkout origin/master -b josephscholl-@'
-    # worktree
-    abbr -a gwl 'git worktree list'
-    abbr -a gwr 'git worktree remove'
-    abbr -a cdw 'cd_worktree'
-    abbr -a cdmw 'cd (git rev-parse --show-toplevel)'
-    abbr -a --set-cursor=@ gnw 'git worktree add ../josephscholl-@'
-    abbr -a --set-cursor=@ zow 'zed_open_worktree'
-    # commit
-    abbr -a gc 'git commit'
-    abbr -a gca 'git commit --amend'
-    abbr -a --set-cursor=@ gcm 'git commit -m "@"'
-    # rebase
-    abbr -a gr 'git rebase'
-    abbr -a gra 'git rebase --abort'
-    abbr -a grc 'git rebase --continue'
-    abbr -a grom 'git fetch && git rebase origin/master --autostash'
-    # push
-    abbr -a gp 'git push'
-    abbr -a gpf 'git push --force-with-lease'
-    # merge requests
-    abbr -a gmr 'git_mr_from'
-    abbr -a gnmr 'git_mr_from'
-
-    # jj vcs abbreviations
-    abbr -a jjl 'jj log'
-    abbr -a jjsh 'jj show'
-    abbr -a jjst 'jj status'
-    abbr -a jjdi 'jj diff'
-
-    abbr -a jjn 'jj new'
-    abbr -a jjnt 'jj new \'trunk()\''
-    abbr -a jjdm --set-cursor=@ 'jj describe -m \'@\''
-    abbr -a jjcm --set-cursor=@ 'jj commit -m \'@\''
-    abbr -a jje 'jj edit'
-    abbr -a jjsp 'jj split'
-    abbr -a jjsq 'jj squash'
-    abbr -a jjrt 'jj rebase --onto \'trunk()\''
-    # resolving conflicts
-    abbr -a jjenc 'jj enc'
-    abbr -a jjm 'jj mergiraf'
-	# bookmarks
-    abbr -a jjb 'jj bookmark'
-    abbr -a jjbc 'jj bookmark create'
-    abbr -a jjbl 'jj bookmark list'
-    abbr -a jjbs 'jj bookmark set'
-    abbr -a jjba 'jj bookmark advance'
-    abbr -a jjbat --set-cursor=% 'jj bookmark advance --to @%'
-	# git remotes
-    abbr -a jjgf 'jj git fetch'
-    abbr -a jjgp 'jj git push'
-    abbr -a jjgpc 'jj git push --change'
-	# workspace
-    abbr -a jjw 'jj workspace'
-    abbr -a jjwl 'jj workspace list'
+	# `mise activate fish | source` seems redundant when installed with homebrew
+	# because of /opt/homebrew/share/fish/vendor_conf.d/mise-activate.fish
+	#mise activate fish | source
+else
+	# Fallback for scripts and IDEs (non interactive)
+    mise activate fish --shims | source
 end
-
-mise activate fish | source

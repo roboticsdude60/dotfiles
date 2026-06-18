@@ -1,1 +1,0 @@
-complete -c zed_open_worktree -f -a '(__fish_git_worktree_paths)' -d 'Open git worktree in Zed editor'
