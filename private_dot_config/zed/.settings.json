@@ -14,7 +14,7 @@
 	"agent_servers": {
 		"claude-acp": {
 			"default_config_options": {
-				"mode": "auto",
+				"mode": "default",
 				"model": "default"
 			},
 			"type": "registry",
@@ -128,7 +128,7 @@
 		"font_size": 13,
 		"copy_on_select": true,
 		"shell": {
-			"program": "fish",
+			"program": "fish"
 		},
 	},
 	"theme": "Zed Legacy: Atelier Seaside Light",
