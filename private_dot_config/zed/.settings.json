@@ -14,8 +14,10 @@
 	"agent_servers": {
 		"claude-acp": {
 			"default_config_options": {
-				"mode": "default",
-				"model": "default"
+				"effort": "default",
+    "fast": "off",
+    "mode": "auto",
+				"model": "sonnet"
 			},
 			"type": "registry",
 		},

@@ -24,6 +24,8 @@ git_push_bookmark = '"josephscholl-" ++ change_id.short()'
 'twig_ends(x)' = 'leaves(x) | branch_roots(x)'
 'or_twig_ends(x)' = 'x | twig_ends(x)'
 
+'my_bookmarks' = 'bookmarks() & mine()'
+
 # Should probably show `present(@)` even if there is an error with a different working copy
 'interesting_from_working_branches' = 'or_twig_ends(present(@)|present(working_copies()))'
 
@@ -31,7 +33,7 @@ git_push_bookmark = '"josephscholl-" ++ change_id.short()'
 'my_unmerged_remote_branch_changes' = '(mine() & trunk().. & immutable() ~ ::remote_bookmarks(release/202*)  )'
 'interesting_from_old_branches' = 'ends(my_unmerged_remote_branch_changes) | twig_ends(my_unmerged_remote_branch_changes)'
 
-'interesting_quick' = 'trunk() | context(present(@), 4) | context(interesting_from_working_branches | bookmarks() | ends(mutable()) | ends(conflicts() & mutable()) , 3)'
+'interesting_quick' = 'trunk() | context(present(@), 4) | context(interesting_from_working_branches | my_bookmarks | ends(mutable()) | ends(conflicts() & mutable()) , 3)'
 'interesting' = 'interesting_quick | context(interesting_from_old_branches, 3)'
 
 [ui]
