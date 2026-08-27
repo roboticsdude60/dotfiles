@@ -75,6 +75,7 @@ abbr -a jjb 'jj bookmark'
 abbr -a jjbc 'jj bookmark create'
 abbr -a jjbl 'jj bookmark list'
 abbr -a jjbs 'jj bookmark set'
+abbr -a jjbt 'jj bookmark track'
 abbr -a jjba 'jj bookmark advance'
 abbr -a jjbat --set-cursor=% 'jj bookmark advance --to @%'
 # git remotes
