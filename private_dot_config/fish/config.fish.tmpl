@@ -10,7 +10,7 @@ if status is-interactive
         /opt/homebrew/bin/brew shellenv fish > $cache/brew_shellenv.fish
     end
     source $cache/brew_shellenv.fish
-    {{ end -}}
+    {{ end }}
 
     if not test -f $cache/atuin.fish; or test atuin -nt $cache/atuin.fish
         # atuin pty-proxy init fish > $cache/atuin.fish
