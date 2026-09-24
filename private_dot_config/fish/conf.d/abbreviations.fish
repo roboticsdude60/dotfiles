@@ -86,4 +86,4 @@ abbr -a jjgpc 'jj git push --change'
 # workspace
 abbr -a jjw 'jj workspace'
 abbr -a jjwl 'jj workspace list'
-abbr -a jjwa 'jj workspace add ../'
+abbr -a --set-cursor=@ jjwa 'jj workspace add ../@'
