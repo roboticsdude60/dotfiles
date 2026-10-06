@@ -8,6 +8,8 @@ end
 
 function _jj_prompt_check --on-variable PWD
     # Quick check if we should skip jj prompt - runs on directory change
+    command kill $_jj_prompt_last_pid 2>/dev/null
+    set --universal $_fish_jj_prompt ""
     if not command -sq jj
         set --global _jj_prompt_skip
         return 1
@@ -68,4 +70,3 @@ function _jj_prompt_uninstall --on-event jj_prompt_uninstall
     functions --erase (functions --all | string match --entire --regex "^_jj_prompt")
     functions --erase fish_jj_prompt
 end
-
