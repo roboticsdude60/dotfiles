@@ -25,3 +25,14 @@
 
 [rerere]
 	enabled = true
+
+[credential "https://gitlab.com"]
+	# For GitLab HTTPS connections, Git needs a username and password.
+	# Use the read-only token as the password; SSH pushes use separate credentials.
+
+	# Clear earlier helpers so Git won't use a credential saved in Keychain.
+	helper =
+
+	# When Git asks for credentials ("get"), return username "oauth2" and
+	# GITLAB_FETCH_TOKEN as the password. Ignore requests to save or erase it.
+	helper = "!f() { if [ \"$1\" = get ] && [ -n \"$GITLAB_FETCH_TOKEN\" ]; then printf \"%s\\n\" \"username=oauth2\" \"password=$GITLAB_FETCH_TOKEN\"; fi; }; f"
