@@ -1,0 +1,12 @@
+# Match fish's GitLab token exports for non-interactive agent sessions.
+if [[ -r ~/.config/gitlab/fetch-token ]]; then
+    IFS= read -r _gitlab_fetch_token < ~/.config/gitlab/fetch-token
+    [[ -n $_gitlab_fetch_token ]] && export GITLAB_FETCH_TOKEN=$_gitlab_fetch_token
+    unset _gitlab_fetch_token
+fi
+
+if [[ -r ~/.config/gitlab/read-api-token ]]; then
+    IFS= read -r _gitlab_read_token < ~/.config/gitlab/read-api-token
+    [[ -n $_gitlab_read_token ]] && export GITLAB_TOKEN=$_gitlab_read_token
+    unset _gitlab_read_token
+fi
