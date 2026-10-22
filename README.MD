@@ -13,6 +13,7 @@ passphrase-protected SSH key.
 | --- | --- | --- | --- |
 | Fetch | `read_repository` | `~/.config/gitlab/fetch-token` | `git`/`jj` HTTPS fetches |
 | Read | `read_api` | `~/.config/gitlab/read-api-token` | `glab` reads and package registry access |
+| Write | `api` | macOS Keychain | `md-to-glab-mr` |
 
 Chezmoi creates the token directory with mode `700` and missing token files with
 mode `600`. Set the file contents locally; future applies preserve them. Both fish
@@ -26,5 +27,10 @@ Its empty `helper =` entry clears earlier helpers so fetches use the read-only
 token instead of saved Keychain credentials. SSH pushes use the existing SSH key.
 
 To configure a newly cloned repo, use `$configure-gitlab-fetch` in Codex or
-`/configure-gitlab-fetch` in Claude Code. Chezmoi manages this shared personal
-skill in `~/.agents/skills`, with a symlink in `~/.claude/skills`.
+`/configure-gitlab-fetch` in Claude Code.
+
+Use `$upsert-glab-mr` in Codex or `/upsert-glab-mr` in Claude Code to create or
+update GitLab merge requests through `md-to-glab-mr` with your approval.
+
+Chezmoi manages both skills in `~/.agents/skills`, with symlinks in
+`~/.claude/skills`.
